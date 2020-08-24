@@ -7,6 +7,7 @@
 #define __INTERPOSE_H
 
 #include <stdint.h>
+#include <stdlib.h>
 
 #include <dlfcn.h>
 
@@ -29,6 +30,8 @@
         (uintptr_t)(dlsym(RTLD_NEXT, #NAME))); \
       __atomic_store_n(&real_##NAME, func, __ATOMIC_RELEASE); \
     } \
+    if(!func) \
+      exit(254); \
     __VA_ARGS__; \
   } \
   extern __typeof__(NAME) NAME __attribute__((weak, alias("__interpose_" #NAME))); \

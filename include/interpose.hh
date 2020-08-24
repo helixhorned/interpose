@@ -7,6 +7,7 @@
 #define __INTERPOSE_HH
 
 #include <cstdint>
+#include <cstdlib>
 #include <functional>
 #include <type_traits>
 #include <dlfcn.h>
@@ -43,6 +44,8 @@ template<typename R, typename... Args> struct fn_info<R(Args...)> {
           reinterpret_cast<uintptr_t>(dlsym(RTLD_NEXT, #NAME))); \
         __atomic_store_n(&real_##NAME, func, __ATOMIC_RELEASE); \
       } \
+      if(!func) \
+        std::exit(254); \
       return func(std::forward<Args>(args)...); \
     } \
   } \
