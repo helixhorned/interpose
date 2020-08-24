@@ -53,12 +53,12 @@ INTERPOSE(realloc)(void* p, size_t sz) {
 INTERPOSE(exit)(int status) {
   fprintf(stderr, START_COLOR);
   fprintf(stderr, "\n\nProgram Allocation Stats\n");
-  fprintf(stderr, "  allocated %lu bytes\n", allocated_bytes);
-  fprintf(stderr, "      freed %lu bytes\n", freed_bytes);
+  fprintf(stderr, "  allocated %zu bytes\n", allocated_bytes);
+  fprintf(stderr, "      freed %zu bytes\n", freed_bytes);
   if(allocated_bytes >= freed_bytes) {
-    fprintf(stderr, "     leaked %lu bytes\n", allocated_bytes - freed_bytes);
+    fprintf(stderr, "     leaked %zu bytes\n", allocated_bytes - freed_bytes);
   } else {
-    fprintf(stderr, "      freed %lu extra bytes\n", freed_bytes - allocated_bytes);
+    fprintf(stderr, "      freed %zu extra bytes\n", freed_bytes - allocated_bytes);
   }
   fprintf(stderr, END_COLOR);
   

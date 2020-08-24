@@ -5,7 +5,7 @@ To use the interpose tool, just `#include <interpose.hh>` in the source file whe
 
 ```c++
 INTERPOSE(malloc)(size_t sz) {
-  fprintf(stderr, "Caught a call to malloc(%lu)\n", sz);
+  fprintf(stderr, "Caught a call to malloc(%zu)\n", sz);
   return real::malloc(sz);
 }
 ```
