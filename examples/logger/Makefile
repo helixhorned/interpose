@@ -15,19 +15,21 @@ CXXLIB       := $(CXX) -shared -fPIC -Wl,-soname,interposer.so
 CCLIB        := $(CC) -shared -fPIC
 endif
 
+WARN         := -Wall -Wextra -pedantic
+
 all: logger.$(SHLIB_SUFFIX) logger_c.$(SHLIB_SUFFIX)
 
 clean:
 	@rm -f logger.$(SHLIB_SUFFIX) logger_c.$(SHLIB_SUFFIX) testprog
 
 logger.$(SHLIB_SUFFIX): logger.cc ../../include/interpose.hh
-	$(CXXLIB) -I../../include --std=c++11 -o $@ $< -ldl
+	$(CXXLIB) $(WARN) -I../../include --std=c++11 -o $@ $< -ldl
 
 logger_c.$(SHLIB_SUFFIX): logger.c ../../include/interpose.h
-	$(CCLIB) -I../../include --std=c99 -o $@ $< -ldl
+	$(CCLIB) $(WARN) -I../../include --std=c99 -o $@ $< -ldl
 
 testprog: testprog.cc
-	$(CXX) --std=c++11 -o $@ $<
+	$(CXX) $(WARN) --std=c++11 -o $@ $<
 
 test: testprog logger.$(SHLIB_SUFFIX)
 	$(PRELOAD_VAR)=./logger.$(SHLIB_SUFFIX) ./testprog
