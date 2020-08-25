@@ -1,7 +1,7 @@
 # Library Call Interposition for Linux and Mac OS
 This single-header project implements dynamic library symbol interposition for both macOS and Linux. This allows you to build shared libraries that can intercept calls to library functions for special handling or replacement. The syntax is the same for both Linux and Mac, despite the fact that these platforms support library interposition with very different mechanisms. This implementation makes use of C++11 features, so it will not work with older versions of C++.
 
-To use the interpose tool, just `#include <interpose.hh>` in the source file where you will implement the replacement functions. A simple replacement function looks like this:
+To use the interpose tool, just `#include "interpose.hh"` in the source file where you will implement the replacement functions. A simple replacement function looks like this:
 
 ```c++
 INTERPOSE(malloc)(size_t sz) {

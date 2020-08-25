@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <interpose.h>
+#include "interpose.h"
 
 #if defined(__APPLE__)
 #include <malloc/malloc.h>

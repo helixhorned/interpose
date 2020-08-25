@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <cstdlib>
 
-#include <interpose.hh>
+#include "interpose.hh"
 
 #if defined(__APPLE__)
 #include <malloc/malloc.h>
